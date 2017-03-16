@@ -4,13 +4,13 @@ Classic Interview Question: Find top K frequent qq numbers in 1000000 (or 100'00
 
 
 
-# Environment
+## Environment
 
 Windows 10 with Clang 3.9 and MSVC 14.0
 
 
 
-# Run
+## Run
 
 ```
 clang++ qq1000.cpp && .\a.exe
@@ -18,7 +18,7 @@ clang++ qq1000.cpp && .\a.exe
 
 
 
-# Ideas
+## Ideas
 
 
 - Use `unordered_map` to count qq frequency.
@@ -35,7 +35,7 @@ Feel free to open a issue or request if there is any mistake\typos\better soluti
 
 
 
-# License
+## License
 
 This project is licensed under the terms of the MIT License.
 
