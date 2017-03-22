@@ -91,7 +91,7 @@ class QQFrequencyDataReducer {
     }
   }
 
-  std::vector<std::pair<uint64_t, uint64_t>> reduce() {
+  TopFrequencyList reduce() {
     std::vector<TopFrequencyList> results;
     // file[] : (count => qq)
     for (int i = 0; i < _manager.size(); i++) {
@@ -153,13 +153,17 @@ class QQFrequencyDataReducer {
     }
     return result;
   }
+
+ private:
+  QQFrequencyDataReducer(const QQFrequencyDataReducer&);
+  QQFrequencyDataReducer& operator=(const QQFrequencyDataReducer&);
 };
 
 class DumpQQCountsHandler {
   QQStorage _storage;
 
  public:
-  DumpQQCountsHandler(const QQStorageManager& storageManager)
+  explicit DumpQQCountsHandler(const QQStorageManager& storageManager)
       : _storage(storageManager) {}
   ~DumpQQCountsHandler() { std::cout << "close.." << std::endl; }
 
