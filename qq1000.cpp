@@ -27,7 +27,7 @@ void create_random_qq_datafile(const char* file, const int n) {
   std::ofstream out(file);
   srand(time(NULL));
   for (int i = 0; i < n; i++) {
-    out << rand() % kMaxQQNumber;
+    out << rand() % kMaxQQNumber << "\n";
   }
   time_end(begin, "Create random QQ %d", n);
 }
