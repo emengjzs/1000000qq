@@ -1,6 +1,6 @@
 # 1000000qq
 
-Classic Interview Question: Find top K frequent qq numbers in 1000000 (or 100'000'000) qq numbers. Written in C++11.
+Classic Interview Question: Find top K frequent qq numbers in 1000000 (or 100'000'000) random qq numbers. Written in C++11.
 
 
 
