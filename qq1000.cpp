@@ -7,16 +7,18 @@
 #include <iostream>
 #include <memory>
 #include <queue>
+#include <random>
 #include <string>
+#include <thread>
 #include <unordered_map>
 #include <utility>
 #include <vector>
 
 inline clock_t time_begin() { return std::clock(); }
 
-template <typename... Args>
-inline void time_end(const clock_t begin, const char* message, Args&&... args) {
-  printf("Task:");
+template <typename... Vars>
+inline void time_end(const clock_t begin, const char* message, Vars&&... args) {
+  printf("Task: ");
   printf(message, args...);
   printf(" -- %.2fs\n", double(std::clock() - begin) / CLOCKS_PER_SEC);
 }
@@ -24,11 +26,33 @@ inline void time_end(const clock_t begin, const char* message, Args&&... args) {
 void create_random_qq_datafile(const char* file, const int n) {
   auto begin = time_begin();
   const int kMaxQQNumber = 100000;
+  const int kThreadCount = 2;
   std::ofstream out(file);
-  srand(time(NULL));
-  for (int i = 0; i < n; i++) {
-    out << rand() % kMaxQQNumber << "\n";
+  std::vector<std::thread> threads;
+  for (int j = 0; j < kThreadCount; j++) {
+    threads.emplace_back([&]() {
+      int index = j;
+      char buffer[16];
+      std::random_device rd;
+      std::mt19937 gen(rd());
+      std::uniform_int_distribution<> dis(1, kMaxQQNumber);
+      for (int i = 0; i < n / kThreadCount; i++) {
+        snprintf(buffer, 16, "%d\n", dis(gen));
+        out << buffer;
+      }
+      if (index == j - 1) {
+        for (int i = 0; i < n % kThreadCount; i++) {
+          snprintf(buffer, 16, "%d\n", dis(gen));
+          out << buffer;
+        }
+      }
+    });
   }
+
+  for (auto& t : threads) {
+    t.join();
+  }
+
   time_end(begin, "Create random QQ %d", n);
 }
 
