@@ -1,6 +1,6 @@
 # 1000000qq
 
-Classic Interview Question: Find top K frequent qq numbers in 1000000 (or 100'000'000) qq numbers. Writting in C++11.
+Classic Interview Question: Find top K frequent qq numbers in 1000000 (or 100'000'000) qq numbers. Written in C++11.
 
 
 
@@ -11,6 +11,14 @@ Windows 10 with Clang 3.9 and MSVC 14.0
 
 
 ## Run
+
+May need to run the following script to get MSVC x64 compiler environment before compiling the program.
+
+```
+"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+```
+
+Compile and run:
 
 ```
 clang++ qq1000.cpp && .\a.exe
@@ -31,7 +39,7 @@ clang++ qq1000.cpp && .\a.exe
 
 ## Contribute
 
-Feel free to open a issue or request if there is any mistake\typos\better solution with the question.
+Feel free to open a issue or pull a request if there is any mistake\typos\better solution with the solution.
 
 
 
