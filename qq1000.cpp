@@ -12,13 +12,24 @@
 #include <utility>
 #include <vector>
 
+inline clock_t time_begin() { return std::clock(); }
+
+template <typename... Args>
+inline void time_end(const clock_t begin, const char* message, Args&&... args) {
+  printf("Task:");
+  printf(message, args...);
+  printf(" -- %.2fs\n", double(std::clock() - begin) / CLOCKS_PER_SEC);
+}
+
 void create_random_qq_datafile(const char* file, const int n) {
+  auto begin = time_begin();
   const int kMaxQQNumber = 100000;
   std::ofstream out(file);
   srand(time(NULL));
   for (int i = 0; i < n; i++) {
-    out << rand() % kMaxQQNumber << std::endl;
+    out << rand() % kMaxQQNumber;
   }
+  time_end(begin, "Create random QQ %d", n);
 }
 
 template <typename CountsHandler>
@@ -67,7 +78,7 @@ class QQStorage {
   }
 
   void storage(uint64_t qq, uint64_t count) {
-    _outs[qq % _outs.size()] << qq << " " << count << std::endl;
+    _outs[qq % _outs.size()] << qq << " " << count << "\n";
   }
 
  private:
